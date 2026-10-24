@@ -1,0 +1,18 @@
+{
+  "name": "ÉTOILE — L'Almanach Personnel des Tables Étoilées",
+  "short_name": "ÉTOILE",
+  "description": "Personal Michelin & World's 50 Best Gastronomy Archive",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F3EFE6",
+  "theme_color": "#F3EFE6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
