@@ -215,6 +215,20 @@ class EtoileApp {
     document.getElementById("tier-count-1").textContent = c1;
     document.getElementById("tier-stars-1").textContent = `${c1}★`;
 
+    const chip = (tier, label) => {
+      const node = document.querySelector(`#collection-tier-chips [data-tier="${tier}"]`);
+      if (node) node.textContent = label;
+    };
+    chip("starred", `ÉTOILÉS / 全部摘星 (${s.starred_count})`);
+    chip("3", `★★★ 三星 (${c3})`);
+    chip("2", `★★ 二星 (${c2})`);
+    chip("1", `★ 一星 (${c1})`);
+    chip("best50", `50 BEST (${s.best50_count})`);
+    chip("green", `ÉTOILE VERTE / 绿星 (${s.green_count})`);
+    chip("xinrong", `XIN RONG JI / 新荣记 (${s.xinrong_count})`);
+    const voir = document.getElementById("voir-three-stars");
+    if (voir) voir.textContent = `VOIR LES ${c3} TABLES / 查阅全部三星 →`;
+
     const propBar = document.getElementById("hero-proportion-bar");
     if (propBar) {
       propBar.innerHTML = `
