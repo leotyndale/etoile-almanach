@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="ivory">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#F3EFE6" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>ÉTOILE — L'Almanach Personnel des Tables Étoilées</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link rel="apple-touch-icon" href="./icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page-frame">
+    <!-- Top Archival Colophon -->
+    <div class="top-colophon">
+      <span>ALMANACH GASTRONOMIQUE PERSONNEL · ÉDITION 2016 — 2027</span>
+      <div class="colophon-actions">
+        <span id="colophon-summary-line">38 VILLES · 217 TABLES ÉTOILÉES</span>
+        <button class="text-action-btn" id="cloud-sync-btn" onclick="app.openCloudSyncModal()">☁ CLOUD SYNC / 云同步</button>
+        <button class="text-action-btn" id="theme-toggle-btn" onclick="app.toggleTheme()">NOIR / 暗夜版</button>
+      </div>
+    </div>
+
+    <!-- Monumental Centered Masthead -->
+    <header class="masthead-banner">
+      <div class="masthead-left">
+        Collection Particulière &amp; Carnet de Table
+      </div>
+
+      <div class="masthead-center" onclick="app.switchView('dashboard')">
+        <h1 class="masthead-wordmark">ÉTOILE</h1>
+        <div class="masthead-sub">米其林摘星与世界五十佳私人典藏志</div>
+      </div>
+
+      <div class="masthead-right">
+        <button class="btn-inscribe" onclick="app.openCheckinStudio()">
+          + INSCRIRE / 录入新席
+        </button>
+      </div>
+    </header>
+
+    <!-- Sticky Razor-Sharp Index Navigation Strip -->
+    <nav class="index-nav-bar" aria-label="Index Navigation">
+      <div class="index-nav-links">
+        <button class="index-tab active" data-view="dashboard" onclick="app.switchView('dashboard')">
+          <span>I · PALMARÈS</span>
+          <span class="index-tab-cn">总览</span>
+        </button>
+        <button class="index-tab" data-view="collection" onclick="app.switchView('collection')">
+          <span>II · RÉPERTOIRE</span>
+          <span class="index-tab-cn">全录</span>
+          <span class="index-tab-count" id="nav-badge-starred">360★</span>
+        </button>
+        <button class="index-tab" data-view="atlas" onclick="app.switchView('atlas')">
+          <span>III · TERROIRS</span>
+          <span class="index-tab-cn">城邦</span>
+          <span class="index-tab-count" id="nav-badge-cities">38</span>
+        </button>
+        <button class="index-tab" data-view="chronicle" onclick="app.switchView('chronicle')">
+          <span>IV · ANNALES</span>
+          <span class="index-tab-cn">编年</span>
+        </button>
+        <button class="index-tab" data-view="unmatched" onclick="app.switchView('unmatched')">
+          <span>V · À DÉCOUVRIR</span>
+          <span class="index-tab-cn">待摘一星</span>
+          <span class="index-tab-count" id="nav-badge-unmatched">352</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ==================================================================
+         VIEW I: PALMARÈS (ASYMMETRIC POSTER & CURATED ARCHIVE)
+         ================================================================== -->
+    <main>
+      <section id="view-dashboard" class="view-pane active">
+        <div class="poster-spread">
+          <!-- Left: Monumental Italic 360 & Proportional Horizon Meter -->
+          <div class="poster-left">
+            <svg class="poster-watermark" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.75">
+              <circle cx="100" cy="100" r="92" stroke-dasharray="2 3"/>
+              <circle cx="100" cy="100" r="68"/>
+              <circle cx="100" cy="100" r="24"/>
+              <line x1="100" y1="0" x2="100" y2="200"/>
+              <line x1="0" y1="100" x2="200" y2="100"/>
+              <line x1="29" y1="29" x2="171" y2="171"/>
+              <line x1="171" y1="29" x2="29" y2="171"/>
+            </svg>
+
+            <div>
+              <div class="poster-overline">LE COMPTE DES ÉTOILES · 历史最高星级单店去重计分</div>
+              <div class="poster-monument-wrap">
+                <div class="poster-giant-figure" id="hero-star-sum">360</div>
+                <div class="poster-figure-caption">
+                  <div class="poster-rosettes" id="hero-macaron-triple"></div>
+                  <div class="poster-caption-zh">颗米其林星冕累计</div>
+                  <div class="poster-caption-fr">sur <span id="hero-starred-count">217</span> tables étoilées &amp; <span id="hero-total-matched">321</span> maisons</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Proportional Horizon Bar -->
+            <div class="proportion-meter-wrap">
+              <div class="proportion-bar" id="hero-proportion-bar">
+                <div class="prop-seg-3" style="flex: 150;" title="Trois Étoiles: 150★"></div>
+                <div class="prop-seg-2" style="flex: 86;" title="Deux Étoiles: 86★"></div>
+                <div class="prop-seg-1" style="flex: 124;" title="Une Étoile: 124★"></div>
+              </div>
+
+              <div class="proportion-legend">
+                <div class="legend-col" onclick="app.jumpToCollection({tier:'3'})">
+                  <div class="legend-tier-head">
+                    <span>TROIS ÉTOILES</span>
+                    <span id="tier-icon-3" style="color:var(--rouge); display:inline-flex; gap:2px;"></span>
+                  </div>
+                  <div class="legend-tier-val"><span id="tier-count-3">50</span><small id="tier-stars-3">150★</small></div>
+                  <div class="legend-tier-name">米其林三星食府</div>
+                </div>
+
+                <div class="legend-col" onclick="app.jumpToCollection({tier:'2'})">
+                  <div class="legend-tier-head">
+                    <span>DEUX ÉTOILES</span>
+                    <span id="tier-icon-2" style="color:var(--rouge); display:inline-flex; gap:2px;"></span>
+                  </div>
+                  <div class="legend-tier-val"><span id="tier-count-2">43</span><small id="tier-stars-2">86★</small></div>
+                  <div class="legend-tier-name">米其林二星食府</div>
+                </div>
+
+                <div class="legend-col" onclick="app.jumpToCollection({tier:'1'})">
+                  <div class="legend-tier-head">
+                    <span>UNE ÉTOILE</span>
+                    <span id="tier-icon-1" style="color:var(--rouge); display:inline-flex;"></span>
+                  </div>
+                  <div class="legend-tier-val"><span id="tier-count-1">124</span><small id="tier-stars-1">124★</small></div>
+                  <div class="legend-tier-name">米其林一星食府</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Architectural Ledger of Secondary Honours + Framed Menu Extract -->
+          <div class="poster-right">
+            <div class="distinction-table">
+              <div class="distinction-row" onclick="app.jumpToCollection({tier:'best50'})">
+                <span class="dist-code">PALMARÈS 50</span>
+                <span class="dist-title">The World's &amp; Asia's 50 Best <em>大班楼 #1 · Le Du #1 · Amber #3</em></span>
+                <span class="dist-num" id="bento-best50-count">45</span>
+              </div>
+
+              <div class="distinction-row" onclick="app.jumpToCollection({tier:'green'})">
+                <span class="dist-code">ÉTOILE VERTE</span>
+                <span class="dist-title">米其林绿星永续料理 <em>Arpège · 京兆尹 · 泰安门 · L'Envol</em></span>
+                <span class="dist-num" id="bento-green-count">15</span>
+              </div>
+
+              <div class="distinction-row" onclick="app.jumpToCollection({tier:'xinrong'})">
+                <span class="dist-code">MONOGRAPHIE</span>
+                <span class="dist-title">新荣记分店独立全集 <em>合 13 星（成都 2027 升三星）</em></span>
+                <span class="dist-num" id="bento-xinrong-count">8</span>
+              </div>
+
+              <div class="distinction-row" onclick="app.jumpToCollection({tier:'bib'})">
+                <span class="dist-code">SÉLECTION</span>
+                <span class="dist-title">必比登推介与指南入选 <em><span id="bento-bib-desc">必比登 6 · 指南餐盘 121</span></em></span>
+                <span class="dist-num" id="bento-bib-count">127</span>
+              </div>
+            </div>
+
+            <!-- Double-Rule Framed Tasting Menu Extract -->
+            <div id="dashboard-featured-extract"></div>
+          </div>
+        </div>
+
+        <!-- Section I: Top Gastronomy Capitals -->
+        <div class="editorial-heading-row">
+          <div class="eh-left">
+            <span class="eh-index">01.</span>
+            <h2 class="eh-title-zh">全球摘星风土志</h2>
+            <span class="eh-title-fr">Les Capitales Gastronomiques (<span id="hero-cities-count">38</span> Villes)</span>
+          </div>
+          <button class="eh-action" onclick="app.switchView('atlas')">TOUTES LES VILLES / 全部城邦 →</button>
+        </div>
+        <div class="terroir-grid" id="dashboard-city-strip"></div>
+
+        <!-- Section II: La Couronne Suprême -->
+        <div class="editorial-heading-row">
+          <div class="eh-left">
+            <span class="eh-index">02.</span>
+            <h2 class="eh-title-zh">米其林三星圣殿选录</h2>
+            <span class="eh-title-fr">La Couronne Suprême · 50 Tables Trois Étoiles</span>
+          </div>
+          <button class="eh-action" onclick="app.jumpToCollection({tier:'3'})">VOIR LES 50 TABLES / 查阅全部三星 →</button>
+        </div>
+        <div class="repertoire-Dynamic-list" id="dashboard-threestar-list"></div>
+
+        <!-- Section III: Maison Xin Rong Ji Special Monograph -->
+        <div class="editorial-heading-row">
+          <div class="eh-left">
+            <span class="eh-index">03.</span>
+            <h2 class="eh-title-zh">新荣记分号专志</h2>
+            <span class="eh-title-fr">Maison Xin Rong Ji · 8 Succursales (13 Étoiles)</span>
+          </div>
+          <button class="eh-action" onclick="app.jumpToCollection({tier:'xinrong'})">MONOGRAPHIE COMPLÈTE →</button>
+        </div>
+        <div class="repertoire-Dynamic-list" id="dashboard-xinrong-list"></div>
+      </section>
+
+      <!-- ==================================================================
+           VIEW II: RÉPERTOIRE COMPLET (FULL ARCHIVAL SLIP DIRECTORY)
+           ================================================================== -->
+      <section id="view-collection" class="view-pane">
+        <div class="editorial-heading-row" style="padding-top:28px;">
+          <div class="eh-left">
+            <span class="eh-index">II.</span>
+            <h2 class="eh-title-zh">个人米其林与获奖食府全录</h2>
+            <span class="eh-title-fr">Le Grand Répertoire des Tables</span>
+          </div>
+        </div>
+
+        <div class="editorial-filter-strip">
+          <div class="efs-search-row">
+            <input type="text" class="efs-input" id="collection-search-input" placeholder="输入店名、法/英/日文原名、城市、主厨或手记关键词（如：Paris / 怀石 / Robuchon / 鮨）..." oninput="app.renderCollection()" />
+
+            <select class="efs-select" id="collection-city-select" onchange="app.renderCollection()">
+              <option value="">ALL CITIES / 全部城邦</option>
+            </select>
+
+            <select class="efs-select" id="collection-sort-select" onchange="app.renderCollection()">
+              <option value="stars_desc">SORT: 最高星级 (3★ → 1★)</option>
+              <option value="recent_desc">SORT: 最近造访日期</option>
+              <option value="visits_desc">SORT: 多刷造访频次</option>
+              <option value="best50_asc">SORT: 50 Best 历史排名</option>
+              <option value="name_asc">SORT: 餐厅名称字母</option>
+            </select>
+          </div>
+
+          <div class="efs-tags-row" id="collection-tier-chips">
+            <button class="efs-tag active" data-tier="all" onclick="app.setCollectionTier('all')">ALL / 全部入账</button>
+            <button class="efs-tag" data-tier="starred" onclick="app.setCollectionTier('starred')">ÉTOILÉS / 全部摘星 (217)</button>
+            <button class="efs-tag" data-tier="3" onclick="app.setCollectionTier('3')">★★★ 三星 (50)</button>
+            <button class="efs-tag" data-tier="2" onclick="app.setCollectionTier('2')">★★ 二星 (43)</button>
+            <button class="efs-tag" data-tier="1" onclick="app.setCollectionTier('1')">★ 一星 (124)</button>
+            <button class="efs-tag" data-tier="best50" onclick="app.setCollectionTier('best50')">50 BEST (45)</button>
+            <button class="efs-tag" data-tier="green" onclick="app.setCollectionTier('green')">ÉTOILE VERTE / 绿星 (15)</button>
+            <button class="efs-tag" data-tier="xinrong" onclick="app.setCollectionTier('xinrong')">XIN RONG JI / 新荣记 (8)</button>
+            <button class="efs-tag" data-tier="bib" onclick="app.setCollectionTier('bib')">BIB &amp; SÉLECTION</button>
+            <button class="efs-tag" data-tier="revisited" onclick="app.setCollectionTier('revisited')">MULTI-VISITES / 多刷</button>
+            <button class="efs-tag" data-tier="noted" onclick="app.setCollectionTier('noted')">NOTES / 含席间手记</button>
+          </div>
+        </div>
+
+        <div id="collection-results-meta" style="padding:10px 0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.12em; color:var(--ink-light); border-bottom:1px solid var(--line-fine);"></div>
+        <div class="repertoire-Dynamic-list" id="collection-stage"></div>
+      </section>
+
+      <!-- ==================================================================
+           VIEW III: TERROIRS & ATLAS
+           ================================================================== -->
+      <section id="view-atlas" class="view-pane">
+        <div class="editorial-heading-row" style="padding-top:28px;">
+          <div class="eh-left">
+            <span class="eh-index">III.</span>
+            <h2 class="eh-title-zh">全球摘星经纬与城邦名录</h2>
+            <span class="eh-title-fr">Cartographie &amp; Index des Villes</span>
+          </div>
+        </div>
+
+        <div id="atlas-map-stage" style="padding:24px 0; border-bottom:1.5px solid var(--line-heavy);"></div>
+        <div class="terroir-grid" id="atlas-cities-full-grid"></div>
+      </section>
+
+      <!-- ==================================================================
+           VIEW IV: ANNALES (CHRONOLOGICAL ARCHIVE 2019 — 2026)
+           ================================================================== -->
+      <section id="view-chronicle" class="view-pane">
+        <div class="editorial-heading-row" style="padding-top:28px;">
+          <div class="eh-left">
+            <span class="eh-index">IV.</span>
+            <h2 class="eh-title-zh">历年造访编年史与私享席履</h2>
+            <span class="eh-title-fr">Les Annales Gastronomiques · 2019 — 2026</span>
+          </div>
+          <button class="btn-inscribe" onclick="app.openCheckinStudio()">+ INSCRIRE / 增补席履</button>
+        </div>
+
+        <div id="chronicle-custom-section"></div>
+        <div id="chronicle-timeline-stage"></div>
+      </section>
+
+      <!-- ==================================================================
+           VIEW V: À DÉCOUVRIR (CANDIDATE 1-STARS IN GUIDE REGIONS)
+           ================================================================== -->
+      <section id="view-unmatched" class="view-pane">
+        <div class="editorial-heading-row" style="padding-top:28px;">
+          <div class="eh-left">
+            <span class="eh-index">V.</span>
+            <h2 class="eh-title-zh">本区待摘米其林一星候选名录</h2>
+            <span class="eh-title-fr">Tables Étoilées à Découvrir (352 Maisons)</span>
+          </div>
+        </div>
+
+        <div class="editorial-filter-strip">
+          <div class="efs-search-row" style="grid-template-columns: 1fr auto;">
+            <input type="text" class="efs-input" id="unmatched-search-input" placeholder="检索待摘一星餐厅名、中文译名或商圈..." oninput="app.loadUnmatchedView()" />
+            <select class="efs-select" id="unmatched-city-select" onchange="app.loadUnmatchedView()">
+              <option value="">ALL CITIES / 全部城邦</option>
+            </select>
+          </div>
+          <div class="efs-tags-row" id="unmatched-city-pills"></div>
+        </div>
+
+        <div class="repertoire-Dynamic-list" id="unmatched-stage"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ====================================================================
+       SLIDE-OVER HAUTE TASTING MENU DOSSIER
+       ==================================================================== -->
+  <div class="menu-backdrop" id="dossier-backdrop" onclick="if(event.target===this) app.closeDossier()">
+    <aside class="menu-sheet" id="dossier-sheet" aria-label="Menu Dégustation &amp; Dossier"></aside>
+  </div>
+
+  <!-- ====================================================================
+       SMART CHECK-IN & GLOBAL AWARD INSCRIPTION STUDIO
+       ==================================================================== -->
+  <div class="menu-backdrop" id="studio-backdrop" onclick="if(event.target===this) app.closeCheckinStudio()">
+    <div class="studio-sheet" id="studio-modal-card"></div>
+  </div>
+
+  <!-- ====================================================================
+       CLOUD SYNC & EXPORT MODAL
+       ==================================================================== -->
+  <div class="menu-backdrop" id="sync-backdrop" onclick="if(event.target===this) app.closeCloudSyncModal()">
+    <div class="studio-sheet" id="sync-modal-card" style="width:min(560px, 94vw);"></div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="./store.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
