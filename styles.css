@@ -1,0 +1,1216 @@
+/* ==========================================================================
+   ÉTOILE — L'ALMANACH PERSONNEL DES TABLES ÉTOILÉES
+   Art Direction: Haute Couture Editorial & Michelin Enameled Plaque System
+   Zero SaaS cards, zero drop-shadow boxes, zero generic icon bars,
+   zero exposed CRUD inputs in reading mode.
+   ========================================================================== */
+
+:root,
+[data-theme="ivory"] {
+  --canvas: #F3EFE6;
+  --paper: #FAF8F3;
+  --ink: #141311;
+  --ink-mid: #4E4A43;
+  --ink-light: #878177;
+  --ink-faint: #C2BCB0;
+
+  --rouge: #A8131A;
+  --rouge-bright: #C4161F;
+  --rouge-tint: rgba(168, 19, 26, 0.06);
+
+  --vert: #1E4D30;
+  --or: #7D5E2A;
+
+  --line-heavy: #141311;
+  --line-mid: rgba(20, 19, 17, 0.25);
+  --line-fine: rgba(20, 19, 17, 0.11);
+}
+
+[data-theme="noir"] {
+  --canvas: #0E0D0C;
+  --paper: #151412;
+  --ink: #EFECE6;
+  --ink-mid: #B5AFA4;
+  --ink-light: #787268;
+  --ink-faint: #383530;
+
+  --rouge: #D42029;
+  --rouge-bright: #E62E37;
+  --rouge-tint: rgba(212, 32, 41, 0.09);
+
+  --vert: #469464;
+  --or: #C8A464;
+
+  --line-heavy: #EFECE6;
+  --line-mid: rgba(239, 236, 230, 0.25);
+  --line-fine: rgba(239, 236, 230, 0.11);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background: var(--rouge);
+  color: #FAF8F3;
+}
+
+/* ==========================================================================
+   Frame & Masthead (Vogue / Le Fooding / Guide Rouge Architecture)
+   ========================================================================== */
+.page-frame {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px 96px;
+}
+
+.top-colophon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-fine);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+.colophon-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.text-action-btn {
+  background: none;
+  border: none;
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+}
+
+.text-action-btn:hover {
+  border-bottom-color: var(--ink);
+}
+
+/* Monumental Centered Masthead */
+.masthead-banner {
+  padding: 24px 0 20px;
+  border-bottom: 2px solid var(--line-heavy);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: baseline;
+}
+
+.masthead-left {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-mid);
+}
+
+.masthead-center {
+  text-align: center;
+  cursor: pointer;
+}
+
+.masthead-wordmark {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  line-height: 0.95;
+  color: var(--ink);
+  padding-left: 0.26em; /* Optical balance for letter-spacing */
+}
+
+.masthead-sub {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--ink-light);
+  margin-top: 6px;
+  padding-left: 0.32em;
+}
+
+.masthead-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.btn-inscribe {
+  background: none;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 7px 15px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.btn-inscribe:hover {
+  background: var(--rouge);
+  border-color: var(--rouge);
+  color: #FAF8F3;
+}
+
+/* Razor-Sharp Horizontal Index Strip */
+.index-nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--line-heavy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.index-nav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.index-nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.index-tab {
+  background: none;
+  border: none;
+  border-right: 1px solid var(--line-fine);
+  padding: 13px 22px;
+  color: var(--ink-light);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.index-tab:first-child {
+  padding-left: 0;
+}
+
+.index-tab:hover {
+  color: var(--ink);
+}
+
+.index-tab.active {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.index-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2.5px;
+  background: var(--rouge);
+}
+
+.index-tab- cn {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+.index-tab-count {
+  font-size: 10px;
+  color: var(--rouge);
+}
+
+/* ==========================================================================
+   Views
+   ========================================================================== */
+.view-pane {
+  display: none;
+}
+
+.view-pane.active {
+  display: block;
+  animation: fadeInPane 0.22s ease-out;
+}
+
+@keyframes fadeInPane {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   View 01: Asymmetric Editorial Poster & Proportional Scale
+   ========================================================================== */
+.poster-spread {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  border-bottom: 2px solid var(--line-heavy);
+}
+
+.poster-left {
+  padding: 44px 40px 44px 0;
+  border-right: 1px solid var(--line-mid);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Subtle Architectural Compass / Rosette Watermark */
+.poster-watermark {
+  position: absolute;
+  right: -36px;
+  top: 18px;
+  width: 240px;
+  height: 240px;
+  color: var(--rouge);
+  opacity: 0.055;
+  pointer-events: none;
+}
+
+.poster-overline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rouge);
+}
+
+.poster-monument-wrap {
+  margin: 18px 0 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+}
+
+.poster-giant-figure {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(96px, 11vw, 152px);
+  font-weight: 500;
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.poster-figure-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.poster-rosettes {
+  color: var(--rouge);
+  display: flex;
+  gap: 5px;
+}
+
+.poster-caption-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.poster-caption-fr {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-mid);
+}
+
+/* Proportional Horizon Bar (Instead of SaaS KPI Cards) */
+.proportion-meter-wrap {
+  margin-top: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-fine);
+}
+
+.proportion-bar {
+  display: flex;
+  height: 6px;
+  width: 100%;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+
+.prop-seg-3 {
+  background: var(--rouge);
+}
+.prop-seg-2 {
+  background: var(--ink);
+}
+.prop-seg-1 {
+  background: var(--ink-light);
+}
+
+.proportion-legend {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line-fine);
+}
+
+.legend-col {
+  padding: 12px 12px 0 0;
+  border-right: 1px solid var(--line-fine);
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.legend-col:not(:first-child) {
+  padding-left: 14px;
+}
+
+.legend-col:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.legend-col:hover {
+  opacity: 0.65;
+}
+
+.legend-tier-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+
+.legend-tier-val {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.legend-tier-val small {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--rouge);
+  margin-left: 4px;
+}
+
+.legend-tier-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12.5px;
+  color: var(--ink-mid);
+  margin-top: 3px;
+}
+
+/* Poster Right: Architectural Ledger of Distinctions & Featured Menu Excerpt */
+.poster-right {
+  padding: 44px 0 44px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.distinction-table {
+  border-top: 1px solid var(--line-heavy);
+}
+
+.distinction-row {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-fine);
+  cursor: pointer;
+  transition: padding-left 0.15s ease;
+}
+
+.distinction-row:hover {
+  padding-left: 6px;
+  background: var(--rouge-tint);
+}
+
+.dist-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--ink-light);
+}
+
+.dist-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.dist-title em {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--ink-light);
+  margin-left: 8px;
+}
+
+.dist-num {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* Featured Sommelier / Menu Extract Box */
+.featured-menu-extract {
+  margin-top: 28px;
+  padding: 22px 24px;
+  background: var(--paper);
+  border: 1px solid var(--line-mid);
+  position: relative;
+  cursor: pointer;
+}
+
+.featured-menu-extract::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--line-fine);
+  pointer-events: none;
+}
+
+.fme-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--rouge);
+  margin-bottom: 10px;
+}
+
+.fme-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.fme-title span {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--ink-mid);
+  margin-left: 8px;
+}
+
+.fme-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ink-mid);
+  margin: 10px 0 12px;
+}
+
+.fme-footer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-light);
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line-fine);
+  padding-top: 8px;
+}
+
+/* ==========================================================================
+   Editorial Section Headings
+   ========================================================================== */
+.editorial-heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 40px 0 12px;
+  border-bottom: 1.5px solid var(--line-heavy);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.eh-left {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.eh-index {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--rouge);
+}
+
+.eh-title-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.eh-title-fr {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-light);
+}
+
+.eh-action {
+  background: none;
+  border: none;
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 1px solid var(--line-mid);
+  padding-bottom: 2px;
+}
+
+.eh-action:hover {
+  color: var(--rouge);
+  border-bottom-color: var(--rouge);
+}
+
+/* ==========================================================================
+   Horizontal City Terroir Index (Typographic Ticket Strip)
+   ========================================================================== */
+.terroir-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-left: 1px solid var(--line-fine);
+}
+
+.terroir-ticket {
+  border-right: 1px solid var(--line-fine);
+  border-bottom: 1px solid var(--line-fine);
+  padding: 20px 18px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 128px;
+}
+
+.terroir-ticket:hover {
+  background-color: var(--paper);
+}
+
+.tt-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.tt-iata {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--ink-light);
+}
+
+.tt-stars {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--rouge);
+}
+
+.tt-city-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: 8px;
+}
+
+.tt-city-en {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-mid);
+}
+
+.tt-foot {
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line-fine);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   Collector's Archival Slip List (The Signature Non-AI Guidebook Layout)
+   ========================================================================== */
+.repertoire-Dynamic-list {
+  border-bottom: 1.5px solid var(--line-heavy);
+}
+
+.archival-slip {
+  display: grid;
+  grid-template-columns: 78px 1fr auto;
+  align-items: baseline;
+  gap: 20px;
+  padding: 16px 8px;
+  border-bottom: 1px solid var(--line-fine);
+  cursor: pointer;
+  transition: background-color 0.12s ease, padding-left 0.15s ease;
+}
+
+.archival-slip:hover {
+  background-color: var(--paper);
+  padding-left: 14px;
+}
+
+.archival-slip:hover .as-name-zh {
+  color: var(--rouge);
+}
+
+.as-left-code {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+
+.as-serial {
+  color: var(--ink-light);
+}
+
+.as-iata {
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.as-center-body {
+  min-width: 0;
+}
+
+.as-title-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.as-name-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  transition: color 0.12s ease;
+}
+
+.as-name-original {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-mid);
+}
+
+.as-sub-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-light);
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.as-critique-line {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12.5px;
+  color: var(--ink-mid);
+  margin-top: 6px;
+  padding-left: 10px;
+  border-left: 1.5px solid var(--rouge);
+}
+
+.as-right-honours {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.as-rosettes {
+  color: var(--rouge);
+  display: inline-flex;
+  gap: 3px;
+}
+
+.as-stamp {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  padding: 1px 6px;
+  border: 1px solid var(--line-mid);
+  color: var(--ink-mid);
+}
+
+.as-stamp.stamp-or {
+  border-color: var(--or);
+  color: var(--or);
+}
+
+.as-stamp.stamp-vert {
+  border-color: var(--vert);
+  color: var(--vert);
+}
+
+.as-date-stub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-light);
+  min-width: 78px;
+  text-align: right;
+  padding-left: 12px;
+  border-left: 1px dashed var(--line-mid);
+}
+
+/* ==========================================================================
+   Filter Bar (Minimalist Editorial Index Filter)
+   ========================================================================== */
+.editorial-filter-strip {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-heavy);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.efs-search-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+}
+
+.efs-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line-mid);
+  padding: 8px 0;
+  color: var(--ink);
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  outline: none;
+}
+
+.efs-input:focus {
+  border-bottom-color: var(--rouge);
+}
+
+.efs-select {
+  background: transparent;
+  border: 1px solid var(--line-mid);
+  padding: 6px 10px;
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  outline: none;
+  cursor: pointer;
+}
+
+.efs-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.efs-tag {
+  background: transparent;
+  border: 1px solid var(--line-fine);
+  color: var(--ink-mid);
+  padding: 4px 11px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.efs-tag:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.efs-tag.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--canvas);
+}
+
+/* ==========================================================================
+   Dossier Sheet: Framed Like a Physical 3-Star French Tasting Menu
+   ========================================================================== */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 13, 12, 0.62);
+  z-index: 200;
+  display: none;
+  justify-content: flex-end;
+}
+
+.menu-backdrop.open {
+  display: flex;
+}
+
+.menu-sheet {
+  width: min(680px, 100vw);
+  height: 100vh;
+  background: var(--paper);
+  border-left: 2px solid var(--line-heavy);
+  overflow-y: auto;
+  padding: 28px 32px 80px;
+  animation: slideMenu 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideMenu {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.menu-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--ink-light);
+}
+
+/* Double-Rule Framed Tasting Menu Card */
+.haute-menu-frame {
+  border: 1.5px solid var(--line-heavy);
+  padding: 5px;
+  background: var(--paper);
+}
+
+.haute-menu-inner {
+  border: 1px solid var(--line-mid);
+  padding: 36px 32px;
+}
+
+.menu-center-crest {
+  text-align: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line-fine);
+}
+
+.menu-rosettes-crest {
+  color: var(--rouge);
+  display: inline-flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.menu-city-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 8px;
+}
+
+.menu-house-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.menu-house-original {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink-mid);
+  margin-top: 4px;
+}
+
+.menu-address-line {
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-top: 10px;
+}
+
+/* Courses / Tasting Notes Display inside Menu (Read Mode) */
+.menu-courses-section {
+  text-align: center;
+  padding: 26px 12px;
+  border-bottom: 1px solid var(--line-fine);
+}
+
+.menu-section-caption {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rouge);
+  margin-bottom: 14px;
+}
+
+.menu-course-item {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  color: var(--ink);
+  margin: 10px 0;
+}
+
+.menu-critique-prose {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--ink-mid);
+  max-width: 480px;
+  margin: 16px auto 0;
+  font-style: normal;
+}
+
+/* Vintage Matrix inside Menu */
+.menu-vintage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  border-top: 1px solid var(--line-fine);
+  border-left: 1px solid var(--line-fine);
+  margin-top: 12px;
+}
+
+.mv-cell {
+  border-right: 1px solid var(--line-fine);
+  border-bottom: 1px solid var(--line-fine);
+  padding: 8px 4px;
+  text-align: center;
+}
+
+.mv-yr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+}
+
+.mv-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--rouge);
+  margin-top: 2px;
+}
+
+/* Edit Form Drawer inside Menu (Hidden by default until user clicks Edit) */
+.menu-editor-drawer {
+  display: none;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1.5px solid var(--line-heavy);
+}
+
+.menu-editor-drawer.open {
+  display: block;
+}
+
+.editor-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.editor-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.editor-field label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+.editor-field input,
+.editor-field textarea {
+  background: var(--canvas);
+  border: 1px solid var(--line-mid);
+  padding: 9px 11px;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13.5px;
+  outline: none;
+}
+
+.editor-field input:focus,
+.editor-field textarea:focus {
+  border-color: var(--ink);
+}
+
+/* Studio Modal */
+.studio-sheet {
+  width: min(760px, 96vw);
+  max-height: 92vh;
+  margin: auto;
+  background: var(--paper);
+  border: 2px solid var(--line-heavy);
+  overflow-y: auto;
+  padding: 32px 36px;
+}
+
+.studio-results-box {
+  max-height: 240px;
+  overflow-y: auto;
+  border-top: 1px solid var(--line-heavy);
+  border-bottom: 1px solid var(--line-heavy);
+  margin: 10px 0 20px;
+}
+
+.studio-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--line-fine);
+  cursor: pointer;
+}
+
+.studio-result-row:hover,
+.studio-result-row.selected {
+  background: var(--rouge-tint);
+}
+
+/* Toast */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 400;
+}
+
+.toast-msg {
+  background: var(--ink);
+  color: var(--canvas);
+  padding: 11px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  border-left: 3px solid var(--rouge);
+}
+
+/* Responsive Adjustments (Works cleanly down to 320px width!) */
+@media (max-width: 960px) {
+  .poster-spread {
+    grid-template-columns: 1fr;
+  }
+  .poster-left {
+    border-right: none;
+    border-bottom: 1px solid var(--line-heavy);
+    padding: 32px 0;
+  }
+  .poster-right {
+    padding: 32px 0;
+  }
+  .terroir-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .masthead-left {
+    display: none;
+  }
+  .masthead-banner {
+    grid-template-columns: 1fr auto;
+  }
+  .masthead-center {
+    text-align: left;
+  }
+  .masthead-wordmark,
+  .masthead-sub {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-frame {
+    padding: 0 16px 80px;
+  }
+  .top-colophon span:first-child {
+    display: none;
+  }
+  .archival-slip {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .as-right-honours {
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 6px;
+    border-top: 1px dotted var(--line-fine);
+  }
+  .efs-search-row,
+  .editor-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .menu-sheet,
+  .studio-sheet {
+    padding: 20px 16px 70px;
+  }
+  .haute-menu-inner {
+    padding: 24px 16px;
+  }
+}
