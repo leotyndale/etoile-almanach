@@ -1111,6 +1111,16 @@ html, body {
   margin: 10px 0;
 }
 
+.menu-intro {
+  font-family: "Noto Serif SC", serif;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink);
+  max-width: 560px;
+  margin: 18px auto 0;
+  text-align: left;
+}
+
 .menu-critique-prose {
   font-family: 'Noto Serif SC', serif;
   font-size: 14px;
