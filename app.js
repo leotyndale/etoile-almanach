@@ -63,20 +63,49 @@ function escapeHtml(str) {
     .replace(/"/g, "&quot;");
 }
 
-function formatBest50Label(bestRank) {
+const BEST50_LISTS = [
+  ["worlds_50", "世界50佳", "世界"],
+  ["asias_50", "亚洲50佳", "亚洲"],
+  ["europe_50", "欧洲50佳", "欧洲"],
+  ["latam_50", "拉美50佳", "拉美"],
+  ["north_america_50", "北美50佳", "北美"],
+  ["mena_50", "中东50佳", "中东"],
+];
+
+function best50Entries(bestRank) {
   if (!bestRank) return [];
-  const tags = [];
-  const mapNames = {
-    worlds_50: "W50",
-    asias_50: "A50",
-    latam_50: "LA50",
-    north_america_50: "NA50",
-    mena_50: "MENA50",
-  };
-  for (const [k, v] of Object.entries(bestRank)) {
-    if (v) tags.push(`${mapNames[k] || k} N°${v}`);
+  const known = new Set(BEST50_LISTS.map((item) => item[0]));
+  const rows = [];
+  for (const [key, full, short] of BEST50_LISTS) {
+    if (!bestRank[key]) continue;
+    let label = full;
+    let brief = short;
+    if (bestRank[key] > 50 && (key === "worlds_50" || key === "asias_50")) {
+      label = key === "worlds_50" ? "世界百佳" : "亚洲百佳";
+      brief = "百佳";
+    }
+    rows.push({ key, full: label, short: brief, rank: bestRank[key] });
   }
-  return tags;
+  for (const [key, rank] of Object.entries(bestRank)) {
+    if (!rank || known.has(key)) continue;
+    const short = String(key).replace(/_50$/, "").replace(/_/g, " ");
+    rows.push({ key, full: short, short, rank });
+  }
+  return rows;
+}
+
+function formatBest50Label(bestRank) {
+  return best50Entries(bestRank).map((row) => `${row.full} N°${row.rank}`);
+}
+
+function formatYearBest50(items) {
+  if (!items || !items.length) return "";
+  const best = {};
+  for (const item of items) {
+    if (!item.rank) continue;
+    if (!best[item.list] || item.rank < best[item.list]) best[item.list] = item.rank;
+  }
+  return best50Entries(best).map((row) => `${row.short} N°${row.rank}`).join(" · ");
 }
 
 const OTHER_LABELS = {
@@ -271,7 +300,7 @@ class EtoileApp {
     chip("3", `★★★ 三星 (${c3})`);
     chip("2", `★★ 二星 (${c2})`);
     chip("1", `★ 一星 (${c1})`);
-    chip("best50", `50 BEST (${s.best50_count})`);
+    chip("best50", `50佳 (${s.best50_count})`);
     chip("green", `ÉTOILE VERTE / 绿星 (${s.green_count})`);
     chip("xinrong", `XIN RONG JI / 新荣记 (${s.xinrong_count})`);
     const voir = document.getElementById("voir-three-stars");
@@ -289,19 +318,20 @@ class EtoileApp {
     document.getElementById("bento-best50-count").textContent = s.best50_count;
     const bestExamples = document.getElementById("bento-best50-examples");
     if (bestExamples) {
-      const picks = (this.data.restaurants || [])
-        .map((r) => {
-          const ranks = Object.values(r.best_rank || {}).filter((n) => n);
-          if (!ranks.length) return null;
-          return { name: r.shop, rank: Math.min(...ranks) };
-        })
-        .filter(Boolean)
-        .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name))
-        .slice(0, 3);
+      const picks = BEST50_LISTS.map(([key, , short]) => {
+        let best = null;
+        for (const restaurant of this.data.restaurants || []) {
+          const rank = restaurant.best_rank && restaurant.best_rank[key];
+          if (!rank) continue;
+          if (!best || rank < best.rank) best = { name: restaurant.shop, rank, short };
+        }
+        return best;
+      }).filter(Boolean);
       if (picks.length) {
-        bestExamples.textContent = picks.map((p) => `${p.name} #${p.rank}`).join(" · ");
+        bestExamples.textContent = picks.slice(0, 3).map((p) => `${p.name} ${p.short} N°${p.rank}`).join(" · ");
       }
     }
+    this.renderBest50Board();
     document.getElementById("bento-green-count").textContent = s.green_count;
     document.getElementById("bento-xinrong-count").textContent = s.xinrong_count;
     document.getElementById("bento-bib-count").textContent = s.bib_count + s.plate_count;
@@ -391,6 +421,80 @@ class EtoileApp {
     }
   }
 
+  renderBest50Board() {
+    const host = document.getElementById("dashboard-best50-board");
+    if (!host || !this.data) return;
+    const groups = [
+      ["worlds_50", "世界50佳", (rank) => rank <= 50],
+      ["asias_50", "亚洲50佳", (rank) => rank <= 50],
+      ["mena_50", "中东50佳", (rank) => rank <= 50],
+      ["latam_50", "拉美50佳", (rank) => rank <= 50],
+      ["north_america_50", "北美50佳", (rank) => rank <= 50],
+      ["europe_50", "欧洲50佳", (rank) => rank <= 50],
+      ["worlds_50", "世界百佳", (rank) => rank > 50],
+      ["asias_50", "亚洲百佳", (rank) => rank > 50],
+    ];
+    const listeRows = [];
+    for (const restaurant of this.data.restaurants || []) {
+      let best = null;
+      let year = null;
+      for (const item of restaurant.other_ranks || []) {
+        if (item.list !== "la_liste" || !item.rank) continue;
+        if (best === null || item.rank < best || (item.rank === best && item.year && (year === null || item.year < year))) {
+          best = item.rank;
+          year = item.year || year;
+        }
+      }
+      if (best) listeRows.push({ id: restaurant.id, name: restaurant.shop, rank: best, year });
+    }
+    listeRows.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name, "zh"));
+    const blocks = groups.map(([key, title, accept]) => {
+      const rows = [];
+      for (const restaurant of this.data.restaurants || []) {
+        const rank = restaurant.best_rank && restaurant.best_rank[key];
+        if (!rank || !accept(rank)) continue;
+        const years = (restaurant.best50 || [])
+          .filter((item) => item.list === key && item.rank === rank && item.year)
+          .map((item) => item.year);
+        rows.push({
+          id: restaurant.id,
+          name: restaurant.shop,
+          rank,
+          year: years.length ? Math.min(...years) : null,
+        });
+      }
+      rows.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name, "zh"));
+      return { title, rows };
+    }).filter((group) => group.rows.length);
+    if (listeRows.length) {
+      const world = blocks.findIndex((group) => group.title === "世界百佳");
+      blocks.splice(world < 0 ? blocks.length : world, 0, { title: "La Liste", rows: listeRows });
+    }
+
+    host.innerHTML = `
+      <div class="best50-board">
+        <div class="best50-board-kicker">PALMARÈS PERSONNEL · 去过的 50 佳，按该榜历史最高名次</div>
+        ${blocks.map((group) => `
+          <section class="best50-list">
+            <header>
+              <span>${escapeHtml(group.title)}</span>
+              <em>${group.rows.length} 家 · 最高 N°${group.rows[0].rank}</em>
+            </header>
+            <ol>
+              ${group.rows.map((row) => `
+                <li onclick="app.openDossier('${escapeHtml(row.id)}')">
+                  <b>N°${row.rank}</b>
+                  <span>${escapeHtml(row.name)}</span>
+                  ${row.year ? `<small>${row.year}</small>` : ""}
+                </li>
+              `).join("")}
+            </ol>
+          </section>
+        `).join("")}
+      </div>
+    `;
+  }
+
   renderTerroirTicketHtml(c) {
     const code = getCityCode(c.city);
     return `
@@ -416,7 +520,9 @@ class EtoileApp {
     const iata = getCityCode(r.city);
     const note = r.user_note || {};
     const b50 = formatBest50Label(r.best_rank);
-    const extra = formatOtherLabel(r.other_ranks);
+    const extraAll = formatOtherLabel(r.other_ranks);
+    const liste = extraAll.filter((label) => label.startsWith("La Liste"));
+    const extra = extraAll.filter((label) => !label.startsWith("La Liste"));
     const dateRaw = r.times && r.times.length > 0 ? r.times[r.times.length - 1] : "CONFIRMÉ";
     const dateFormatted = dateRaw.replace(/-/g, ".");
 
@@ -464,11 +570,8 @@ class EtoileApp {
               ? `<span class="as-stamp stamp-vert">VERTE</span>`
               : ""
           }
-          ${
-            b50.length > 0
-              ? `<span class="as-stamp stamp-or">${escapeHtml(b50[0])}</span>`
-              : ""
-          }
+          ${b50.map((label) => `<span class="as-stamp stamp-or">${escapeHtml(label)}</span>`).join("")}
+          ${liste.map((label) => `<span class="as-stamp stamp-or">${escapeHtml(label)}</span>`).join("")}
           ${
             extra.length > 0
               ? `<span class="as-stamp stamp-or">${escapeHtml(extra[0])}</span>`
@@ -895,7 +998,7 @@ class EtoileApp {
           </div>
           ${
             ym.best50 && ym.best50.length
-              ? `<div style="font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--or);">#${ym.best50[0].rank}</div>`
+              ? `<div style="font-family:'Noto Serif SC',serif; font-size:10px; color:var(--or);">${escapeHtml(formatYearBest50(ym.best50))}</div>`
               : ""
           }
           ${
