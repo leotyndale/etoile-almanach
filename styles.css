@@ -278,17 +278,22 @@ html, body {
 .poster-spread {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
+  align-items: start;
   border-bottom: 2px solid var(--line-heavy);
 }
 
+.poster-spread:has(+ #dashboard-featured-extract:not(:empty)) {
+  border-bottom: none;
+}
+
 .poster-left {
-  padding: 44px 40px 44px 0;
+  padding: 44px 40px 36px 0;
   border-right: 1px solid var(--line-mid);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 /* Subtle Architectural Compass / Rosette Watermark */
@@ -440,10 +445,10 @@ html, body {
 
 /* Poster Right: Architectural Ledger of Distinctions & Featured Menu Excerpt */
 .poster-right {
-  padding: 44px 0 44px 40px;
+  padding: 44px 0 36px 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .distinction-table {
@@ -496,8 +501,97 @@ html, body {
 }
 
 /* Featured Sommelier / Menu Extract Box */
+#dashboard-featured-extract:not(:empty) {
+  border-bottom: 2px solid var(--line-heavy);
+}
+
+.best50-board {
+  padding: 22px 0 8px;
+  border-bottom: 2px solid var(--line-heavy);
+}
+
+.best50-board-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--rouge);
+  margin-bottom: 14px;
+}
+
+.best50-list {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 8px 18px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line-fine);
+}
+
+.best50-list header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.best50-list header span {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.best50-list header em {
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--ink-light);
+}
+
+.best50-list ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 2px 0 0;
+}
+
+.best50-list li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.best50-list li b {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--rouge);
+}
+
+.best50-list li span {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+}
+
+.best50-list li small {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+}
+
+.best50-list li:hover span {
+  color: var(--rouge);
+}
+
+@media (max-width: 720px) {
+  .best50-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 .featured-menu-extract {
-  margin-top: 28px;
+  margin: 22px 0 26px;
   padding: 22px 24px;
   background: var(--paper);
   border: 1px solid var(--line-mid);
@@ -783,8 +877,11 @@ html, body {
 .as-right-honours {
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px 8px;
   flex-shrink: 0;
+  max-width: 280px;
 }
 
 .as-rosettes {
