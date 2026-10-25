@@ -287,6 +287,21 @@ class EtoileApp {
     }
 
     document.getElementById("bento-best50-count").textContent = s.best50_count;
+    const bestExamples = document.getElementById("bento-best50-examples");
+    if (bestExamples) {
+      const picks = (this.data.restaurants || [])
+        .map((r) => {
+          const ranks = Object.values(r.best_rank || {}).filter((n) => n);
+          if (!ranks.length) return null;
+          return { name: r.shop, rank: Math.min(...ranks) };
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name))
+        .slice(0, 3);
+      if (picks.length) {
+        bestExamples.textContent = picks.map((p) => `${p.name} #${p.rank}`).join(" · ");
+      }
+    }
     document.getElementById("bento-green-count").textContent = s.green_count;
     document.getElementById("bento-xinrong-count").textContent = s.xinrong_count;
     document.getElementById("bento-bib-count").textContent = s.bib_count + s.plate_count;
