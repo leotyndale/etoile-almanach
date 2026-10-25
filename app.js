@@ -78,6 +78,53 @@ function formatBest50Label(bestRank) {
   return tags;
 }
 
+const OTHER_LABELS = {
+  la_liste: "La Liste",
+  gault_millau: "G&M",
+  oad: "OAD",
+  best_chef: "Best Chef",
+  best_chef_pizza: "Best Chef Pizza",
+  white_guide: "White",
+  falstaff: "Falstaff",
+  fifty_top: "50 Top",
+  fifty_top_pizza: "50 Top Pizza",
+  gambero_rosso: "Gambero Rosso",
+  espresso: "Espresso",
+  slow_food: "Slow Food",
+  identita: "Identità",
+  golosario: "Golosario",
+  bibenda: "Bibenda",
+  i_cento: "I Cento",
+  pecora_nera: "Pecora Nera",
+  zagat: "Zagat",
+  gayot: "Gayot",
+  touring: "Touring",
+  henris: "Henris",
+  accademia: "Accademia",
+  repubblica: "Repubblica",
+  repsol: "Repsol",
+  black_pearl: "Black Pearl",
+  feinschmecker: "Feinschmecker",
+};
+
+function formatOtherLabel(rows) {
+  if (!rows || !rows.length) return [];
+  const best = {};
+  for (const row of rows) {
+    const prev = best[row.list];
+    const score = row.rank ? 1000 - row.rank : row.score || row.level || 0;
+    const prevScore = prev ? (prev.rank ? 1000 - prev.rank : prev.score || prev.level || 0) : -1;
+    if (!prev || score > prevScore) best[row.list] = row;
+  }
+  return Object.values(best).map((row) => {
+    const name = OTHER_LABELS[row.list] || row.list;
+    if (row.rank) return `${name} N°${row.rank}`;
+    if (row.score) return `${name} ${row.score}`;
+    if (row.level) return `${name} ${row.level}`;
+    return name;
+  });
+}
+
 class EtoileApp {
   constructor() {
     this.data = null;
@@ -353,6 +400,7 @@ class EtoileApp {
     const iata = getCityCode(r.city);
     const note = r.user_note || {};
     const b50 = formatBest50Label(r.best_rank);
+    const extra = formatOtherLabel(r.other_ranks);
     const dateRaw = r.times && r.times.length > 0 ? r.times[r.times.length - 1] : "CONFIRMÉ";
     const dateFormatted = dateRaw.replace(/-/g, ".");
 
@@ -403,6 +451,11 @@ class EtoileApp {
           ${
             b50.length > 0
               ? `<span class="as-stamp stamp-or">${escapeHtml(b50[0])}</span>`
+              : ""
+          }
+          ${
+            extra.length > 0
+              ? `<span class="as-stamp stamp-or">${escapeHtml(extra[0])}</span>`
               : ""
           }
           ${
@@ -811,6 +864,7 @@ class EtoileApp {
     const note = r.user_note || {};
     const dishes = note.highlight_dishes || [];
     const b50 = formatBest50Label(r.best_rank);
+    const extra = formatOtherLabel(r.other_ranks);
 
     const vintageCells = (r.yearly_matrix || [])
       .map(
@@ -826,6 +880,11 @@ class EtoileApp {
           ${
             ym.best50 && ym.best50.length
               ? `<div style="font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--or);">#${ym.best50[0].rank}</div>`
+              : ""
+          }
+          ${
+            ym.other && ym.other.length
+              ? `<div style="font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--or);">${escapeHtml(formatOtherLabel(ym.other)[0] || "")}</div>`
               : ""
           }
         </div>`
@@ -860,6 +919,11 @@ class EtoileApp {
             ${
               b50.length
                 ? `<div style="margin-top:10px;"><span class="as-stamp stamp-or">${escapeHtml(b50.join(" · "))}</span></div>`
+                : ""
+            }
+            ${
+              extra.length
+                ? `<div style="margin-top:8px;"><span class="as-stamp stamp-or">${escapeHtml(extra.join(" · "))}</span></div>`
                 : ""
             }
             ${
