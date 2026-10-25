@@ -73,14 +73,28 @@ function etoileYearlyMatrix(row) {
     if (!b.year) continue;
     (bestByYear[b.year] || (bestByYear[b.year] = [])).push(b);
   }
+  const otherByYear = {};
+  for (const item of row.other_ranks || []) {
+    if (!item.year) continue;
+    (otherByYear[item.year] || (otherByYear[item.year] = [])).push(item);
+  }
+  const years = new Set();
+  for (let y = 2016; y <= 2027; y += 1) years.add(y);
+  for (const list of Object.values(starYears)) {
+    for (const y of list || []) if (y) years.add(y);
+  }
+  for (const y of [...green, ...bib, ...plate]) years.add(y);
+  Object.keys(bestByYear).forEach((y) => years.add(Number(y)));
+  Object.keys(otherByYear).forEach((y) => years.add(Number(y)));
   const matrix = [];
-  for (let y = 2016; y <= 2027; y += 1) {
+  for (const y of [...years].filter((year) => year >= 1950 && year <= 2027).sort((a, b) => a - b)) {
     let stars = 0;
     for (const lv of ["3", "2", "1"]) {
       if ((starYears[lv] || []).includes(y)) stars = Math.max(stars, Number(lv));
     }
     const b50 = bestByYear[y] || [];
-    if (stars || green.has(y) || bib.has(y) || plate.has(y) || b50.length) {
+    const other = otherByYear[y] || [];
+    if (stars || green.has(y) || bib.has(y) || plate.has(y) || b50.length || other.length) {
       matrix.push({
         year: y,
         stars,
@@ -88,6 +102,7 @@ function etoileYearlyMatrix(row) {
         bib: bib.has(y),
         plate: plate.has(y),
         best50: b50,
+        other,
       });
     }
   }
@@ -298,6 +313,7 @@ function etoileRestaurantFromCatalog(item, shop, city, date, note) {
     plate_years: item.py || [],
     best50: item.b50 || [],
     best_rank: item.br || {},
+    other_ranks: item.or || [],
     yearly_matrix: [],
     is_xinrong: /xin rong|新荣记/i.test(`${awardName} ${shop}`),
     special_note: "",
@@ -432,6 +448,8 @@ const etoile = {
         plate_years: item.py || [],
         best50: item.b50 || [],
         best_rank: item.br || {},
+        other_ranks: item.or || [],
+        other_ranks: item.or || [],
         already_checked_in: have.has(`${etoileFold(item.n)}|${item.c}`),
         _compact: item,
       })),
