@@ -1,4 +1,4 @@
-const CACHE_NAME = "etoile-almanach-v8";
+const CACHE_NAME = "etoile-almanach-v9";
 const ASSETS = [
   "./",
   "./index.html",
