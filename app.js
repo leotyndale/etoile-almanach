@@ -336,6 +336,10 @@ class EtoileApp {
     document.getElementById("bento-xinrong-count").textContent = s.xinrong_count;
     document.getElementById("bento-bib-count").textContent = s.bib_count + s.plate_count;
     document.getElementById("bento-bib-desc").textContent = `必比登 ${s.bib_count} · 指南入选 ${s.plate_count}`;
+    const hatCount = document.getElementById("bento-hat-count");
+    if (hatCount) hatCount.textContent = s.hat_count || 0;
+    const hatDesc = document.getElementById("bento-hat-desc");
+    if (hatDesc) hatDesc.textContent = `历史最高合计 ${s.hat_sum || 0} 帽，不计入星星`;
 
     // Featured Tasting Menu Extract on Right Column
     const extractBox = document.getElementById("dashboard-featured-extract");
@@ -418,6 +422,33 @@ class EtoileApp {
         )
         .join("");
       xrContainer.innerHTML = matchedHtml + unmatchedHtml;
+    }
+
+    const hatList = document.getElementById("dashboard-hats-list");
+    if (hatList) {
+      const hats = this.data.hats || [];
+      hatList.innerHTML = hats.map((row, idx) => `
+          <div class="archival-slip" style="cursor:default;">
+            <div class="as-left-code">
+              <span class="as-serial">${String(idx + 1).padStart(2, "0")}</span>
+              <span class="as-iata">${row.hats}帽</span>
+            </div>
+            <div class="as-center-body">
+              <div class="as-title-line">
+                <span class="as-name-zh">${escapeHtml(row.shop)}</span>
+                <span class="as-name-original">${escapeHtml(row.award_name)}</span>
+              </div>
+              <div class="as-sub-meta">
+                <span>${escapeHtml(row.city_zh)}</span>
+                <span>·</span>
+                <span>${escapeHtml(row.guide)}</span>
+              </div>
+            </div>
+            <div class="as-right-honours">
+              <span class="as-stamp">${row.hats} TOQUES</span>
+              <span class="as-date-stub">${escapeHtml((row.time || "").replace(/-/g, "."))}</span>
+            </div>
+          </div>`).join("");
     }
   }
 
