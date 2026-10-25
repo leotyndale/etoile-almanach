@@ -1025,7 +1025,7 @@ class EtoileApp {
             ${ym.stars ? "★".repeat(ym.stars) : ""}
             ${ym.green ? `<span style="color:var(--vert)">V</span>` : ""}
             ${ym.bib ? "Bib" : ""}
-            ${ym.plate && !ym.stars ? `<span style="color:var(--ink-light)">Sél</span>` : ""}
+            ${ym.plate && !ym.stars ? `<span class="mv-plate">入选</span>` : ""}
           </div>
           ${
             ym.best50 && ym.best50.length
