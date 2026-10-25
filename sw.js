@@ -1,4 +1,4 @@
-const CACHE_NAME = "etoile-almanach-v4";
+const CACHE_NAME = "etoile-almanach-v5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -6,7 +6,9 @@ const ASSETS = [
   "./app.js",
   "./store.js",
   "./manifest.json",
-  "./icon.svg",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./apple-touch-icon.png",
   "./data/bootstrap.json",
   "./data/region_unmatched.json"
 ];
