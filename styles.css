@@ -1124,7 +1124,7 @@ html, body {
 /* Vintage Matrix inside Menu */
 .menu-vintage-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
   border-top: 1px solid var(--line-fine);
   border-left: 1px solid var(--line-fine);
   margin-top: 12px;
@@ -1149,6 +1149,12 @@ html, body {
   font-weight: 600;
   color: var(--rouge);
   margin-top: 2px;
+}
+
+.mv-plate {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 500;
+  color: var(--ink-light);
 }
 
 /* Edit Form Drawer inside Menu (Hidden by default until user clicks Edit) */
