@@ -23,6 +23,7 @@ const CITY_CODES = {
   "shenzhen": "SZX",
   "lyon": "LYS",
   "chasselay": "LYO",
+  "chagny": "XAN",
   "nara": "NAR",
   "sapporo": "SPK",
   "fukuoka": "FUK",
