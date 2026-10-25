@@ -358,7 +358,7 @@ class EtoileApp {
             <div class="fme-title">
               ${escapeHtml(noted.shop)}<span>${escapeHtml(noted.award_name)} (${escapeHtml(noted.city_en)})</span>
             </div>
-            <p class="fme-quote">“${escapeHtml(noted.user_note?.notes || noted.cuisine)}”</p>
+            <p class="fme-quote">“${escapeHtml(noted.user_note?.notes || noted.intro || noted.cuisine)}”</p>
             <div class="fme-footer">
               <span>${escapeHtml(dishes || noted.cuisine)}</span>
               <span>VISITE: ${escapeHtml((noted.times || [])[0] || "ARCHIVE")} →</span>
@@ -443,6 +443,7 @@ class EtoileApp {
                 <span>·</span>
                 <span>${escapeHtml(row.guide)}</span>
               </div>
+              ${row.intro ? `<div class="as-critique-line">${escapeHtml(row.intro)}</div>` : ""}
             </div>
             <div class="as-right-honours">
               <span class="as-stamp">${row.hats} TOQUES</span>
@@ -591,7 +592,9 @@ class EtoileApp {
           ${
             note.notes
               ? `<div class="as-critique-line">“${escapeHtml(note.notes)}”</div>`
-              : ""
+              : r.intro
+                ? `<div class="as-critique-line">${escapeHtml(r.intro)}</div>`
+                : ""
           }
         </div>
 
@@ -1066,6 +1069,7 @@ class EtoileApp {
               ${escapeHtml(r.award_name)}${r.zh_name && r.zh_name !== r.shop ? ` · ${escapeHtml(r.zh_name)}` : ""}
             </div>
             <div class="menu-address-line">${escapeHtml(r.cuisine)} · ${escapeHtml(r.address || r.city_zh)}</div>
+            ${r.intro ? `<p class="menu-intro">${escapeHtml(r.intro)}</p>` : ""}
             ${
               b50.length
                 ? `<div style="margin-top:10px;"><span class="as-stamp stamp-or">${escapeHtml(b50.join(" · "))}</span></div>`
