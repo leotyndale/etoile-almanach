@@ -151,7 +151,7 @@
             <div class="distinction-table">
               <div class="distinction-row" onclick="app.jumpToCollection({tier:'best50'})">
                 <span class="dist-code">PALMARÈS 50</span>
-                <span class="dist-title">The World's &amp; Asia's 50 Best <em id="bento-best50-examples">NARISAWA #1 · Le Du #1 · Nahm #1</em></span>
+                <span class="dist-title">50 Best 分榜 <em id="bento-best50-examples">世界 · 亚洲 · 拉美 · 北美 · 中东</em></span>
                 <span class="dist-num" id="bento-best50-count">45</span>
               </div>
 
@@ -173,11 +173,11 @@
                 <span class="dist-num" id="bento-bib-count">127</span>
               </div>
             </div>
-
-            <!-- Double-Rule Framed Tasting Menu Extract -->
-            <div id="dashboard-featured-extract"></div>
           </div>
         </div>
+
+        <div id="dashboard-featured-extract"></div>
+        <div id="dashboard-best50-board"></div>
 
         <!-- Section I: Top Gastronomy Capitals -->
         <div class="editorial-heading-row">
@@ -237,7 +237,7 @@
               <option value="stars_desc">SORT: 最高星级 (3★ → 1★)</option>
               <option value="recent_desc">SORT: 最近造访日期</option>
               <option value="visits_desc">SORT: 多刷造访频次</option>
-              <option value="best50_asc">SORT: 50 Best 历史排名</option>
+              <option value="best50_asc">SORT: 50佳历史最高名次</option>
               <option value="name_asc">SORT: 餐厅名称字母</option>
             </select>
           </div>
@@ -248,7 +248,7 @@
             <button class="efs-tag" data-tier="3" onclick="app.setCollectionTier('3')">★★★ 三星 (51)</button>
             <button class="efs-tag" data-tier="2" onclick="app.setCollectionTier('2')">★★ 二星 (49)</button>
             <button class="efs-tag" data-tier="1" onclick="app.setCollectionTier('1')">★ 一星 (127)</button>
-            <button class="efs-tag" data-tier="best50" onclick="app.setCollectionTier('best50')">50 BEST (45)</button>
+            <button class="efs-tag" data-tier="best50" onclick="app.setCollectionTier('best50')">50佳</button>
             <button class="efs-tag" data-tier="green" onclick="app.setCollectionTier('green')">ÉTOILE VERTE / 绿星 (15)</button>
             <button class="efs-tag" data-tier="xinrong" onclick="app.setCollectionTier('xinrong')">XIN RONG JI / 新荣记 (8)</button>
             <button class="efs-tag" data-tier="bib" onclick="app.setCollectionTier('bib')">BIB &amp; SÉLECTION</button>
