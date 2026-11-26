@@ -1,0 +1,315 @@
+{
+  "summary": {
+    "total_matched": 3,
+    "starred_count": 3,
+    "star_sum": 6,
+    "tiers": {
+      "3": 1,
+      "2": 1,
+      "1": 1
+    },
+    "bib_count": 0,
+    "plate_count": 0,
+    "green_count": 1,
+    "best50_count": 2,
+    "xinrong_count": 0,
+    "xinrong_stars": 0,
+    "cities_count": 3,
+    "region_unmatched_count": 0,
+    "overseas_unmatched_count": 0,
+    "custom_checkin_count": 0,
+    "wishlist_count": 0,
+    "hat_count": 0,
+    "hat_sum": 0
+  },
+  "hats": [],
+  "restaurants": [
+    {
+      "id": "arpege|paris",
+      "shop": "Arpège",
+      "award_name": "Arpège",
+      "zh_name": "Arpège",
+      "city": "paris",
+      "award_city": "paris",
+      "city_zh": "巴黎",
+      "city_en": "Paris",
+      "country_zh": "法国",
+      "region": "Europe",
+      "lat": 48.8556,
+      "lng": 2.317,
+      "address": "84 Rue de Varenne, 75007 Paris",
+      "cuisine": "Contemporary French · 现代法餐",
+      "times": ["2026-05-12"],
+      "visit_count": 1,
+      "first_visit": "2026-05-12",
+      "latest_visit": "2026-05-12",
+      "match": "已确认",
+      "max_stars": 3,
+      "star_years": {
+        "3": [2024, 2025, 2026]
+      },
+      "green_years": [2024, 2025, 2026],
+      "bib_years": [],
+      "plate_years": [],
+      "best50": [
+        { "list": "worlds_50", "year": 2025, "rank": 45 }
+      ],
+      "best_rank": {
+        "worlds_50": 45
+      },
+      "other_ranks": [],
+      "yearly_matrix": [
+        {
+          "year": 2026,
+          "stars": 3,
+          "green": true,
+          "bib": false,
+          "plate": false,
+          "best50": [],
+          "other": []
+        }
+      ],
+      "is_xinrong": false,
+      "special_note": "",
+      "intro": "Starter sample entry: Three-Michelin-Star & Green Star flagship in Paris.",
+      "user_note": {
+        "rating": 5,
+        "chef": "Alain Passard",
+        "highlight_dishes": ["L'œuf chaud-froid", "Vegetable tasting menu"],
+        "wine_pairing": "Burgundy flight",
+        "price_per_person": "€490",
+        "companions": "",
+        "notes": "Sample tasting note — edit or add your own tables in the browser.",
+        "photos": [],
+        "updated_at": "2026-05-12"
+      }
+    },
+    {
+      "id": "den|tokyo",
+      "shop": "Den",
+      "award_name": "Den",
+      "zh_name": "傳",
+      "city": "tokyo",
+      "award_city": "tokyo",
+      "city_zh": "东京",
+      "city_en": "Tokyo",
+      "country_zh": "日本",
+      "region": "Asia",
+      "lat": 35.6728,
+      "lng": 139.7115,
+      "address": "2-3-18 Jingumae, Shibuya-ku, Tokyo",
+      "cuisine": "Creative Kaiseki · 创意怀石",
+      "times": ["2026-03-18"],
+      "visit_count": 1,
+      "first_visit": "2026-03-18",
+      "latest_visit": "2026-03-18",
+      "match": "已确认",
+      "max_stars": 2,
+      "star_years": {
+        "2": [2024, 2025, 2026]
+      },
+      "green_years": [],
+      "bib_years": [],
+      "plate_years": [],
+      "best50": [
+        { "list": "asias_50", "year": 2025, "rank": 22 }
+      ],
+      "best_rank": {
+        "asias_50": 22
+      },
+      "other_ranks": [],
+      "yearly_matrix": [
+        {
+          "year": 2026,
+          "stars": 2,
+          "green": false,
+          "bib": false,
+          "plate": false,
+          "best50": [],
+          "other": []
+        }
+      ],
+      "is_xinrong": false,
+      "special_note": "",
+      "intro": "Starter sample entry: Two-Michelin-Star creative kaiseki in Tokyo.",
+      "user_note": {
+        "rating": 5,
+        "chef": "Zaiyu Hasegawa",
+        "highlight_dishes": ["Dentucky Fried Chicken", "Den Salad"],
+        "wine_pairing": "Sake pairing",
+        "price_per_person": "¥35,000",
+        "companions": "",
+        "notes": "",
+        "photos": [],
+        "updated_at": "2026-03-18"
+      }
+    },
+    {
+      "id": "vea|hong kong",
+      "shop": "VEA",
+      "award_name": "VEA",
+      "zh_name": "VEA",
+      "city": "hong kong",
+      "award_city": "hong kong",
+      "city_zh": "香港",
+      "city_en": "Hong Kong",
+      "country_zh": "中国香港",
+      "region": "Greater China",
+      "lat": 22.2836,
+      "lng": 114.1552,
+      "address": "30/F, The Wellington, 198 Wellington St, Central",
+      "cuisine": "Chinese x French · 中法融合",
+      "times": ["2026-01-20"],
+      "visit_count": 1,
+      "first_visit": "2026-01-20",
+      "latest_visit": "2026-01-20",
+      "match": "已确认",
+      "max_stars": 1,
+      "star_years": {
+        "1": [2024, 2025, 2026]
+      },
+      "green_years": [],
+      "bib_years": [],
+      "plate_years": [],
+      "best50": [],
+      "best_rank": {},
+      "other_ranks": [],
+      "yearly_matrix": [
+        {
+          "year": 2026,
+          "stars": 1,
+          "green": false,
+          "bib": false,
+          "plate": false,
+          "best50": [],
+          "other": []
+        }
+      ],
+      "is_xinrong": false,
+      "special_note": "",
+      "intro": "Starter sample entry: One-Michelin-Star Chinese-French tasting counter in Hong Kong.",
+      "user_note": {
+        "rating": 0,
+        "chef": "Vicky Cheng",
+        "highlight_dishes": ["Roasted Sea Cucumber"],
+        "wine_pairing": "",
+        "price_per_person": "HK$2,280",
+        "companions": "",
+        "notes": "",
+        "photos": [],
+        "updated_at": "2026-01-20"
+      }
+    }
+  ],
+  "xinrong_unmatched_branches": [],
+  "cities": [
+    {
+      "city": "paris",
+      "city_zh": "巴黎",
+      "city_en": "Paris",
+      "country_zh": "法国",
+      "region": "Europe",
+      "lat": 48.8556,
+      "lng": 2.317,
+      "total_restaurants": 1,
+      "total_stars": 3,
+      "star_3": 1,
+      "star_2": 0,
+      "star_1": 0,
+      "green": 1,
+      "bib": 0,
+      "plate": 0,
+      "best50": 1,
+      "top_restaurants": [
+        { "id": "arpege|paris", "shop": "Arpège", "award_name": "Arpège", "max_stars": 3 }
+      ]
+    },
+    {
+      "city": "tokyo",
+      "city_zh": "东京",
+      "city_en": "Tokyo",
+      "country_zh": "日本",
+      "region": "Asia",
+      "lat": 35.6728,
+      "lng": 139.7115,
+      "total_restaurants": 1,
+      "total_stars": 2,
+      "star_3": 0,
+      "star_2": 1,
+      "star_1": 0,
+      "green": 0,
+      "bib": 0,
+      "plate": 0,
+      "best50": 1,
+      "top_restaurants": [
+        { "id": "den|tokyo", "shop": "Den", "award_name": "Den", "max_stars": 2 }
+      ]
+    },
+    {
+      "city": "hong kong",
+      "city_zh": "香港",
+      "city_en": "Hong Kong",
+      "country_zh": "中国香港",
+      "region": "Greater China",
+      "lat": 22.2836,
+      "lng": 114.1552,
+      "total_restaurants": 1,
+      "total_stars": 1,
+      "star_3": 0,
+      "star_2": 0,
+      "star_1": 1,
+      "green": 0,
+      "bib": 0,
+      "plate": 0,
+      "best50": 0,
+      "top_restaurants": [
+        { "id": "vea|hong kong", "shop": "VEA", "award_name": "VEA", "max_stars": 1 }
+      ]
+    }
+  ],
+  "chronicle": [
+    {
+      "year": "2026",
+      "visits": 3,
+      "stars_visited": 6,
+      "three_stars": 1,
+      "items": [
+        {
+          "date": "2026-05-12",
+          "id": "arpege|paris",
+          "shop": "Arpège",
+          "award_name": "Arpège",
+          "city_zh": "巴黎",
+          "city_en": "Paris",
+          "max_stars": 3,
+          "green": true,
+          "best50": true
+        },
+        {
+          "date": "2026-03-18",
+          "id": "den|tokyo",
+          "shop": "Den",
+          "award_name": "Den",
+          "city_zh": "东京",
+          "city_en": "Tokyo",
+          "max_stars": 2,
+          "green": false,
+          "best50": true
+        },
+        {
+          "date": "2026-01-20",
+          "id": "vea|hong kong",
+          "shop": "VEA",
+          "award_name": "VEA",
+          "city_zh": "香港",
+          "city_en": "Hong Kong",
+          "max_stars": 1,
+          "green": false,
+          "best50": false
+        }
+      ]
+    }
+  ],
+  "custom_checkins": [],
+  "wishlist": []
+}
